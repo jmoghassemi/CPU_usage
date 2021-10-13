@@ -1,0 +1,16 @@
+[Unit]
+Description=CPU usage report
+
+[Service]
+WorkingDirectory=/etc/cpuUsage
+ExecStart=/etc/cpuUsage/cpuUsage.py
+Restart=always
+StandardOutput=syslog
+StandardError=inherit
+RuntimeDirectory=sshd
+RuntimeDirectoryMode=0755
+RuntimeDirectory=report
+RuntimeDirectoryMode=0755
+
+[Install]
+WantedBy=multi-user.target
