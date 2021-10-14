@@ -4,7 +4,6 @@ Description=CPU usage report
 [Service]
 WorkingDirectory=/etc/cpuUsage
 ExecStart=/etc/cpuUsage/cpuUsage.py
-Restart=always
 StandardOutput=syslog
 StandardError=inherit
 RuntimeDirectory=report
