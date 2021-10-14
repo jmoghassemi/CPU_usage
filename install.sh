@@ -9,10 +9,13 @@ if [[ ! -e $logDir ]]; then
     sudo -s mkdir -p $logDir
 fi
 
+<<<<<<< HEAD
 if [[ ! -e $destinationDir/report ]]; then
 	sudo -s mkdir -p $destinationDir/report
 fi
 
+=======
+>>>>>>> 66279eb573b8955d38397d005521843bdd86136a
 if [[ ! -f $logDir/$logName ]]; then
 	sudo -s touch $logDir/$logName
 fi

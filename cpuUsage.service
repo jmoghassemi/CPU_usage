@@ -4,8 +4,16 @@ Description=CPU usage report
 [Service]
 WorkingDirectory=/etc/cpuUsage
 ExecStart=/etc/cpuUsage/cpuUsage.py
+<<<<<<< HEAD
 StandardOutput=syslog
 StandardError=inherit
+=======
+Restart=always
+StandardOutput=syslog
+StandardError=inherit
+RuntimeDirectory=sshd
+RuntimeDirectoryMode=0755
+>>>>>>> 66279eb573b8955d38397d005521843bdd86136a
 RuntimeDirectory=report
 RuntimeDirectoryMode=0755
 
