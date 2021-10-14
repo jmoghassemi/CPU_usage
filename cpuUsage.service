@@ -3,7 +3,7 @@ Description=CPU usage report
 
 [Service]
 WorkingDirectory=/etc/cpuUsage
-ExecStart=/etc/cpuUsage/cpuUsage.py
+ExecStart=/home/folder_cpu_usage/CPU_usage/install.sh
 <<<<<<< HEAD
 StandardOutput=syslog
 StandardError=inherit
