@@ -7,8 +7,6 @@ ExecStart=/etc/cpuUsage/cpuUsage.py
 Restart=always
 StandardOutput=syslog
 StandardError=inherit
-RuntimeDirectory=sshd
-RuntimeDirectoryMode=0755
 RuntimeDirectory=report
 RuntimeDirectoryMode=0755
 

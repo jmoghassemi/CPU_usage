@@ -9,6 +9,10 @@ if [[ ! -e $logDir ]]; then
     sudo -s mkdir -p $logDir
 fi
 
+if [[ ! -e $destinationDir/report ]]; then
+	sudo -s mkdir -p $destinationDir/report
+fi
+
 if [[ ! -f $logDir/$logName ]]; then
 	sudo -s touch $logDir/$logName
 fi
