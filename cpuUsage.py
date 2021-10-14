@@ -49,6 +49,8 @@ if __name__ == "__main__":
 	if args.minutes > 60 or args.minutes<1:
 		parser.error("minutes cannot be larger than 60 and less than 1.")
 
-	while check_free_mem_per()>args.byte_limit_value:
-		print(f"Start to monitor system each {args.minutes} minutes. make alert wall")
-		time.sleep(args.minutes*60)
+	while True: 
+		if check_free_mem_per()>args.byte_limit_value:
+			print(f"Start to monitor system each {args.minutes} minutes. make alert wall")
+			time.sleep(args.minutes*60)
+

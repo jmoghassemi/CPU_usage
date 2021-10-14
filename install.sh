@@ -9,24 +9,24 @@ if [[ ! -e $logDir ]]; then
     sudo -s mkdir -p $logDir
 fi
 
-<<<<<<< HEAD
 if [[ ! -e $destinationDir/report ]]; then
 	sudo -s mkdir -p $destinationDir/report
 fi
 
-=======
->>>>>>> 66279eb573b8955d38397d005521843bdd86136a
 if [[ ! -f $logDir/$logName ]]; then
 	sudo -s touch $logDir/$logName
 fi
 
 if [[ ! -f /etc/systemd/system/cpuUsage.service ]]; then
-	sudo -s cp $sourceDir/cpuUsage.service /etc/systemd/system
+	sudo -s cp $sourceDir/cpuUsage.service /etc/systemd/system &>> sudo -s $logDir/$logName
+	date >> sudo -s $logDir/$logName
+	echo "CPU usage service copied to systemd." >> sudo -s $logDir/$logName
 fi
 
 if [[ ! -f /etc/cpuUsage/cpuUsage.py ]]; then
-	sudo -s cp $sourceDir/cpuUsage.py /etc/cpuUsage
+	sudo -s cp $sourceDir/cpuUsage.py /etc/cpuUsage &>> sudo -s $logDir/$logName
 fi
 
-sudo -s systemctl daemon-reload
-sudo -s systemctl enable cpuUsage.service
+sudo -s systemctl daemon-reload &>> sudo -s $logDir/$logName
+sudo -s systemctl enable cpuUsage.service &>> sudo -s $logDir/$logName
+sudo -s systemctl start cpuUsage.service &>> sudo -s $logDir/$logName
