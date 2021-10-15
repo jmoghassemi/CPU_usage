@@ -2,5 +2,5 @@
 The third assignment.
 Collaborator:
   Java Ein Moghassemi
-  Hadi taghilouei
+  Hadi Taghilouei
   MohammadHossein Labafbashi
