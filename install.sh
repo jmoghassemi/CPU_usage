@@ -29,11 +29,11 @@ if [[ ! -f /etc/cpuUsage/cpuUsage.py ]]; then
 sudo -s cp $sourceDir/cpuUsage.py /etc/cpuUsage &>> sudo -s $logDir/$logName
 fi
 
-while true 
-do
-	echo The current time is $(date)
-	sleep 1
-done
+#while true 
+#do
+#	echo The current time is $(date)
+#	sleep 1
+#done
 
 sudo -s systemctl daemon-reload &>> sudo -s $logDir/$logName
 sudo -s systemctl enable cpuUsage.service &>> sudo -s $logDir/$logName
