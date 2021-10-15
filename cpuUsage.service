@@ -2,20 +2,8 @@
 Description=CPU usage report
 
 [Service]
-WorkingDirectory=/etc/cpuUsage
-ExecStart=/home/folder_cpu_usage/CPU_usage/install.sh
-<<<<<<< HEAD
-StandardOutput=syslog
-StandardError=inherit
-=======
+ExecStart=/usr/bin/python3 /home/paramont/CPU_usage/cpuUsage.py
 Restart=always
-StandardOutput=syslog
-StandardError=inherit
-RuntimeDirectory=sshd
-RuntimeDirectoryMode=0755
->>>>>>> 66279eb573b8955d38397d005521843bdd86136a
-RuntimeDirectory=report
-RuntimeDirectoryMode=0755
 
 [Install]
 WantedBy=multi-user.target
