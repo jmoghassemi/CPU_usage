@@ -6,7 +6,7 @@ def cpu_rapport():
 	date = datetime.now().strftime("%Y-%m-%d")
 	full_time = datetime.now().strftime("%H:%M:%S")
 
-	cpu_filename = 'cpu_' + date + '.log'
+	cpu_filename = '~/cpuUsage/report/cpu_' + date + '.log'
 	f = open(cpu_filename, "a")
 	f.write(full_time + '\n')
 
