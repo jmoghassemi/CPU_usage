@@ -23,10 +23,6 @@ if __name__ == "__main__":
 	
 	args = parser.parse_args()
 	
-#	print("Argument values:")
-#	print(args.byte_limit_value)
-#	print(args.minutes)
-
 	if args.byte_limit_value > 99.99 or args.byte_limit_value < 0:
 		parser.error("byte_limit_value cannot be larger than 99.99 and less than 0.")
 	if args.minutes > 60 or args.minutes<1:
@@ -36,5 +32,6 @@ if __name__ == "__main__":
 		if func.check_free_mem_per()>args.byte_limit_value:
 			print(f"Start to monitor system each {args.minutes} minutes. make alert wall")
 			func.cpu_rapport()
+			func.mem_rapport()
 			time.sleep(args.minutes*60)
 

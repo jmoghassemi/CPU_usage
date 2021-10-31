@@ -1,22 +1,25 @@
 import os
 from datetime import datetime
+#####################################
+####### Global Variables ############
+date = datetime.now().strftime("%Y-%m-%d")
+full_time = datetime.now().strftime("%H:%M:%S")
 
+#####################################
 
 def cpu_rapport():
-	date = datetime.now().strftime("%Y-%m-%d")
-	full_time = datetime.now().strftime("%H:%M:%S")
-
-	cpu_filename = '~/cpuUsage/report/cpu_' + date + '.log'
+	# When system memory usage rise up this function start to work. This function get a proccess information and write all data in file. 
+	cpu_filename = '/etc/cpuUsage/report/cpu_' + date + '.log'
 	f = open(cpu_filename, "a")
 	f.write(full_time + '\n')
 
-	ps_output = os.popen('ps -o pid,user,%mem,command ax | grep -v PID').read().splitlines()
+	ps_output = os.popen('ps -o pid,user,%mem,command ax | grep -v PID | grep -v 0.0').read().splitlines()
 
+	print(top_output_cpu)
 	tmp_txt = ''
 
 	for item in ps_output:
 		tx = item.split()
-		# wf = ps_output[item] +','+ ps_output[item+1] + ',' + ps_output[item+2] + '\n'
 		if tx[2] != '0.0':
 			wf = tx[0] + ',' + tx[1] + ',' + tx[2] + ','
 			if len(tx) > 3:
@@ -26,6 +29,24 @@ def cpu_rapport():
 		f.write(wf + '\n')
 	f.close()
 
+def mem_rapport():
+	# When system memory usage rise up this function start to work. This function get a memory and swap information and write all data in file. To make a chart report we using this file output.
+	mem_filename = '/etc/cpuUsage/report/mem_' + date + '.log'
+	swp_filename = '/etc/cpuUsage/report/swp_' + date + '.log'
+	f = open(mem_filename, "a")
+	mem_output = os.popen('free -mw | grep Mem').read().split()
+	swap_output = os.popen('free -mw | grep Swap').read().split()
+	mem_output[0] = full_time
+	swap_output[0] = full_time
+	
+	mf = open(mem_filename, "a")
+	mf.write(mem_output[0]+','+mem_output[1]+','+mem_output[2]+','+mem_output[3]+','+mem_output[6]+'\n')
+	mf.close()
+	
+	sf = open(swp_filename, "a")
+	sf.write(swap_output[0]+','+swap_output[1]+','+swap_output[2]+','+swap_output[3]+'\n')
+	sf.close()
+
 def get_total_mem():
   total_raw_mem=os.popen('cat /proc/meminfo | grep MemTotal').read().split()
   return int(total_raw_mem[1])/1024/1024
@@ -33,14 +54,8 @@ def get_total_mem():
 def check_free_mem_per():
   mem_raw=os.popen('free -mw | grep Mem').read().split()
   free_mem_percent="{:.2}".format(int(mem_raw[3])/int(mem_raw[1]))
-#  print(f"Total Memory: {mem_raw[1]}")
-#  print(f"Free Memory: {mem_raw[3]}")
-#  print(f"Free Memory Percent: {free_mem_percent}%")
-#  print("#############################################")
   return float(free_mem_percent)
 
 def check_cpu():
   mpstat_raw=os.popen('mpstat | grep all').read().split()
-#  print(f"IO wait %: {mpstat_raw[5]}")
-#  print(f"Idle %: {mpstat_raw[11]}")
 

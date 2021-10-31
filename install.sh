@@ -18,6 +18,8 @@ fi
 if [[ ! -e $destinationDir/report ]]; then
 	echo "${destinationDir}/report could not found. Start to creating."
 	sudo -S mkdir -vp $destinationDir/report
+	sudo -S chmod -R 777 $destinationDir/report
+	sudo -s chmod -R +t $destinationDir/report
 fi
 
 if [[ ! -f $destinationDir/cpuUsage.py ]]; then
