@@ -15,7 +15,6 @@ def cpu_rapport():
 
 	ps_output = os.popen('ps -o pid,user,%mem,command ax | grep -v PID | grep -v 0.0').read().splitlines()
 
-	print(top_output_cpu)
 	tmp_txt = ''
 
 	for item in ps_output:
@@ -49,13 +48,22 @@ def mem_rapport():
 
 def get_total_mem():
   total_raw_mem=os.popen('cat /proc/meminfo | grep MemTotal').read().split()
-  return int(total_raw_mem[1])/1024/1024
+  return round(int(total_raw_mem[1])/1024)
 
 def check_free_mem_per():
   mem_raw=os.popen('free -mw | grep Mem').read().split()
   free_mem_percent="{:.2}".format(int(mem_raw[3])/int(mem_raw[1]))
   return float(free_mem_percent)
 
+def check_mem_used():
+	mem_raw=os.popen('free -mw | grep Mem').read().split()
+	return int(mem_raw[2])
+
 def check_cpu():
   mpstat_raw=os.popen('mpstat | grep all').read().split()
 
+def make_alert_wall():
+	print(f"System total memory \033[1;36;40m {get_total_mem()}MB \033[0;37;40m")
+	print(f"System memory usage \033[1;31;40m {check_mem_used()}MB \033[0;37;40m")
+	print("Please check the report files in this path \n\t \033[1;32;40m /etc/cpuUsage/report/ \033[0;37;40m")
+	print("======================================== \n")
