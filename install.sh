@@ -23,7 +23,7 @@ if [[ ! -e $destinationDir/report ]]; then
 fi
 
 if [[ ! -f $destinationDir/cpuUsage.py ]]; then
-	echo "application was not find. Start to copy..."
+	echo "Cpu usage service was not find. Start to copy..."
 	sudo -S cp -i $sourceDir/cpuUsage.py /etc/cpuUsage
 	sudo -S cp -i $sourceDir/functions.py /etc/cpuUsage
 fi
