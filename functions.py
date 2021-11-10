@@ -32,7 +32,7 @@ def mem_rapport():
 	# When system memory usage rise up this function start to work. This function get a memory and swap information and write all data in file. To make a chart report we using this file output.
 	mem_filename = '/etc/cpuUsage/report/mem_' + date + '.log'
 	swp_filename = '/etc/cpuUsage/report/swp_' + date + '.log'
-	f = open(mem_filename, "a")
+
 	mem_output = os.popen('free -mw | grep Mem').read().split()
 	swap_output = os.popen('free -mw | grep Swap').read().split()
 	mem_output[0] = full_time

@@ -13,6 +13,8 @@ if [[ ! -f $destinationDir/$logName ]]; then
   sudo -S touch $destinationDir/$logName
 	sudo -S bash -c 'date > $0/$1' $destinationDir $logName
 	sudo -S bash -c 'echo "Application log created in $0/$1"' $destinationDir $logName
+else
+	echo "${destinationDir}/${logName} was exist."
 fi
 
 if [[ ! -e $destinationDir/report ]]; then
@@ -20,17 +22,23 @@ if [[ ! -e $destinationDir/report ]]; then
 	sudo -S mkdir -vp $destinationDir/report
 	sudo -S chmod -R 777 $destinationDir/report
 	sudo -s chmod -R +t $destinationDir/report
+else
+	echo "${destinationDir}/report was exist."
 fi
 
 if [[ ! -f $destinationDir/cpuUsage.py ]]; then
-	echo "Cpu usage service was not find. Start to copy..."
-	sudo -S cp -i $sourceDir/cpuUsage.py /etc/cpuUsage
-	sudo -S cp -i $sourceDir/functions.py /etc/cpuUsage
+	echo "Cpu usage application was not find. Start to copy..."
+	sudo -S cp -iv $sourceDir/cpuUsage.py $destinationDir
+	sudo -S cp -iv $sourceDir/functions.py $destinationDir
+else
+	echo "Cpu usage application exist."
 fi
 
 if [[ ! -f /etc/systemd/system/cpuUsage.service ]]; then
- sudo -S cp -i $sourceDir/cpuUsage.service /etc/systemd/system
+ sudo -S cp -iv $sourceDir/cpuUsage.service /etc/systemd/system
  echo "CPU usage service copied to systemd." 
+else
+	echo "CPU usage service was exist."
 fi
 
 sudo -S systemctl daemon-reload
