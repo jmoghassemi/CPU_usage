@@ -16,7 +16,7 @@ git clone git@github.com:jmoghassemi/CPU_usage.git
 2) The developers of this program have assumed that the user will clone this project onto their "/home" directory. Therefore, the default settings of this program are configured as such. If you decide to clone this program into another directory on your system, then before any testing, you must first provide that address/absolute path to the bash script "config.sh". In "config.sh" set the variable "sourceDir" equal to the path where the project is cloned.
 => sourceDir = 'address of the directory where the project is cloned'
 
-Once "sourceDir" has been set to the correct path, you can execute the bash script "config.sh" using either of these two commands: "./config.sh" or "bash config.sh". Failing to set "sourceDir" equal to the path where the project is cloned will stop this program from running properly.	
+  Once "sourceDir" has been set to the correct path, you can execute the bash script "config.sh" using either of these     two commands: "./config.sh" or "bash config.sh". Failing to set "sourceDir" equal to the path where the project is       cloned will stop this program from running properly.	
     
 3) Next, execute the bash script "install.sh" by either of these commands "./install.sh" or "bash install.sh". This script creates multiple directories on your system that are going to be used by the program later on. Make sure install.sh is executable on your system by running this command first: "chmod +x install.sh". (for more information regarding "install.sh" please refer to the table of contents bellow).
 
@@ -24,9 +24,11 @@ Once "sourceDir" has been set to the correct path, you can execute the bash scri
 There are other ways to input your arguments into cpuUsage.py. For example, you can open the service file cpuUsage.service in vim and provide the arguments as such: "ExecStart=/usr/bin/python3 /home/paramont/CPU_usage/cpuUsage.py [integer for MB] [integer for min]". Or open cpuUsage.py in Vim and under the "Variable Definition" section you will find the "default_limit" and "default min" variables. You can change these values as you wish. 
 After the cpuUsage.py has been executed, the user's system will be constantly monitored and once the critical threshold is reached, three report files will be generated in this address: '/etc/cpuUsage/destinationDir/report'. These files are "cpu_[date].log", "mem_[date].log", and "swap_[date].log". Here you can find what each entry represents in each file.  
 
-cpu_date.log: 1) pid 2) user 3) %mem 4) command
-mem_date.log: 1) total Mem (mebibytes) 2) used Mem (mebibytes) 3) free Mem (mebibytes) 4) shared (mebibytes)
-swap_date.log: 1) total 2) used 3) free 
+  cpu_[date].log: 1) pid 2) user 3) %mem 4) command
+
+  mem_[date].log: 1) total Mem (mebibytes) 2) used Mem (mebibytes) 3) free Mem (mebibytes) 4) shared (mebibytes)
+
+  swap_[date.log]: 1) total 2) used 3) free 
   
 TABLE OF CONTENTS
 
