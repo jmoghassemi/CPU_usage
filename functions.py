@@ -1,4 +1,4 @@
-import os
+import os  
 from datetime import datetime
 #####################################
 ####### Global Variables ############
@@ -8,7 +8,7 @@ full_time = datetime.now().strftime("%H:%M:%S")
 #####################################
 
 def cpu_rapport():
-	# When system memory usage rise up this function start to work. This function get a proccess information and write all data in file. 
+    # When system memory usage is larger than the critical threshold, this function will be executed. This function logs the information about the proccesses running on the user's systm into a file.  
 	cpu_filename = '/etc/cpuUsage/report/cpu_' + date + '.log'
 	f = open(cpu_filename, "a")
 	f.write(full_time + '\n')
@@ -29,7 +29,7 @@ def cpu_rapport():
 	f.close()
 
 def mem_rapport():
-	# When system memory usage rise up this function start to work. This function get a memory and swap information and write all data in file. To make a chart report we using this file output.
+	# When system's memory usage is larger than the critical threshold, this function will be executed. This function logs the user's memory and swap information in a file. 
 	mem_filename = '/etc/cpuUsage/report/mem_' + date + '.log'
 	swp_filename = '/etc/cpuUsage/report/swp_' + date + '.log'
 
