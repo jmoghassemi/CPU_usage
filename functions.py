@@ -8,7 +8,8 @@ full_time = datetime.now().strftime("%H:%M:%S")
 #####################################
 
 def cpu_rapport():
-    # When system memory usage is larger than the critical threshold, this function will be executed. This function logs the information about the proccesses running on the user's systm into a file.  
+ # When system memory usage is larger than the critical threshold, this function will be executed. This function logs the information about the proccesses running on the user's systm into cpu_[date].log, located at /etc/cpuUsage/report.  
+  
 	cpu_filename = '/etc/cpuUsage/report/cpu_' + date + '.log'
 	f = open(cpu_filename, "a")
 	f.write(full_time + '\n')
@@ -29,7 +30,9 @@ def cpu_rapport():
 	f.close()
 
 def mem_rapport():
-	# When system's memory usage is larger than the critical threshold, this function will be executed. This function logs the user's memory and swap information in a file. 
+ # When system's memory usage is larger than the critical threshold, this function will be executed. This function logs the user's memory and swap information into mem_[date].log and swp_[date].log, located at /etc/cpuUsage/report.
+  
+ 
 	mem_filename = '/etc/cpuUsage/report/mem_' + date + '.log'
 	swp_filename = '/etc/cpuUsage/report/swp_' + date + '.log'
 
