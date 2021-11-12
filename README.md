@@ -5,55 +5,40 @@ Collaborator:
   Hadi Taghilouei, 
   MohammadHossein Labafbashi
 
-This program's purpose is to keep the load on CPU in check. Users are able to set a critical threshhold for CPU usage and how often this program should monitor the system. The inputs are in Mega Bytes and time given in minutes. Bellow you can find instructions on how to run this program. After the instructions, you will find a list of contents of the files in CPU_usage, followed by a short description of what each file does.   
+This program's purpose is to keep the load on a computer's CPU in check, using a python script. The python script accepts two inputs from its user: 1) a critical threshold of memory usage, given in Mega Bytes and 2) the time intervals between each session of monitoring the system, given in minutes, when that critical threshold has been surpassed. In order to improve the user's experience, two bash scripts have been included in this project (config.sh and install.sh). They automatically copy files and create directories that are essential to this program, therefore minimizing any manual adjustments. 
+Bellow you can find instructions on how to run this program, and also, a table of contents that explains the inner workings of this program in more detail.
+
 
 HOW TO RUN THE PROGRAM:
-1) Execute the bash file "install.sh". Make sure install.sh is executable on your system by running this command first: chmod +x install.sh Then run this command in order to start the program: bash install.sh 
-	
-2) Execute the python script "cpuUsage.py" with this command: python3 cpuUsge.py. This script has its own default values for the crtitical CPU usage threshold and how often the python script checks the CPU usage. These default values are set to 75% of CPU being used and a reccurring evaluation of the system every 3 minutes. These default values can be changed manually within the python script. Open cpuUsage.py in Vim and under the "Variable Definition" section you will find the "default_limit" and "default min" variables. You can change these values as you wish.    
+1) The first step is to clone this program from Github onto your own computer. Run this command on your terminal and the project will be cloned on your system: 
+git clone git@github.com:jmoghassemi/CPU_usage.git
+  
+2)The developers of this program have assumed that the user will clone this project onto their "/home" directory. Therefore, the default settings of this program are configured as such. If you decide to clone this program into another directory on your system, then before any testing, you must first provide that address/absolute path to the bash script "config.sh". In "config.sh" set the variable "sourceDir" equal to the path where the project is cloned.
+=> sourceDir = 'address of the directory where the project is cloned'
+Once "sourceDir" has been set to the correct path, you can execute the bash script "config.sh" using either of these two commands: "./config.sh" or "bash config.sh". Failing to set "sourceDir" equal to the path where the project is cloned will stop this program from running properly.	
+    
+3) Next, execute the bash script "install.sh" by either of these commands "./install.sh" or "bash install.sh". This script creates multiple directories on your system that are going to be used by the program later on. Make sure install.sh is executable on your system by running this command first: "chmod +x install.sh". (for more information regarding "install.sh" please refer to the table of contents bellow).
 
-The contents of CPU_usage are listed bellow, followed by a short description of what each file does.  
+4) After succesfuly running the "install.sh" script, the user can test the program. Execute the python script "cpuUsage.py" with this command and give it your inputs: "python3 cpuUsge.py [integer for MB] [integer for min]. You can also run the python script without any inputs since it has been assigned default arguments. These default values are set to 75 MB of memory being used and a reccurring evaluation of the system every 3 minutes. 
+There are other ways to input your arguments into cpuUsage.py. For example, you can open the service file system cpuUsage.service in vim and provide the arguments as such: "ExecStart=/usr/bin/python3 /home/paramont/CPU_usage/cpuUsage.py [integer for MB] [integer for min]". Or open cpuUsage.py in Vim and under the "Variable Definition" section you will find the "default_limit" and "default min" variables. You can change these values as you wish. After the cpuUsage.py has been executed, the user's system will be constantly monitored and once the critical threshold is reached, three report files will be generated in this address: '/etc/cpuUsage/destinationDir/report'. These files are "cpu_date.log", "mem_date.log", and "swap_date.log".  
+
+  
+TABLE OF CONTENTS
+
+config.sh:
+In a nutshell, this bash script is created so that any user can change certain components of this program more conviniently. For example, the script enables the program to recognize the user's machine's name. It enables the user to change the paths of the files that are going to be created by install.sh to whatever path they desire, change the name of the log file to any name the user sees fit, and it also stores the user's email so it can later email the report file to them. 
 
 install.sh:
-This bash script creates a directory called "destinationDir" on your system. The path to this directory is: /etc/cpuUsage. Then it creates two files within this directory: 1)logname and 2)report. "logname" keeps track of ... and "report" is where this program will save the details of your system's status once your system has exceeded the critical threshold of CPU usage. 
-This bash script will also copy the cpuUsage.py script in the "destinationDir" directory. It also copies the service file that is respinsoble for monitoring your system in this path: /etc/systemd/system
-	
-	// $destinationDir: 
-	// $destinationDir/$logname:
-	// $destinationDir/report:
-	// $DestinationDir/cpuUsage.py:
-	// $sourceDir/cpuUsage.service /etc/systemd/system:
-	
-		 	 
-	
-config.sh:
-In a nutshell, this bash script is created so that any user can change certain components of this program more conviniently. For example, the script enables the program to recognize the user's machine's name. It enables the user to change the paths of the files that are going to be created by install.sh to whatever path they desire, change the name of the log file to any name the user sees fit, and it also stores the user's email so it can later email the report file to them. Alternatively, by modifying the config.sh script, the user can overcome the hassel of interacting with the more complex file of install.sh.
-	// userName=`whoami`
-
-	// sourceDir='/home/'${userName}'/CPU_usage'
-	// destinationDir='/etc/cpuUsage'
-
-	// logName='cpuUsage.log'
-
-	// mailTo='user@example.com'
-
-cpuUasge.service:
-	[Unit]
-	Description=CPU usage report
-
-	[Service]
-	ExecStart=/usr/bin/python3 /home/paramont/CPU_usage/cpuUsage.py
-	Restart=always
-
-	[Install]
-	WantedBy=multi-user.target
+This bash script creates mutiple directories and files on the user's computer. It imports the "config.sh" bash script and it makes a directory "destinationDir" with the path address "/etc/cpuUsage", where the cpuUsage.py and functions.py will be copied. It makes a directory called "report" within "destinationDir". This is where the system's report file will be saved once it has gone over the critical threshold. "install.sh" also copies the service file "cpuUsage.service" on the user's computer, located at "/etc/systemd/system". 
 
 cpuUsage.py:
-	default_limit: 75% of cpu usage
-	default_min: 3 min
+This is the python script that will moniter the user's system once executed.
 
 functions.py:
-	
+cpuUsage.py utilizes this script and it imports all the required functions from it.
+
+cpuUsage.service:
+This is a customized service file created explicitly for this program. A version of it is copied onto the user's "/etc/systemd/system" directory. It enables the user to run this program as a systemd service, and it accepts the [MB] threshold and the [min] arguments from the user.  
 
 
   
