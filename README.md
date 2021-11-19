@@ -40,7 +40,7 @@ After the cpuUsage.py has been executed, the user's system will be constantly mo
 
   swap_[date.log]: 1) total 2) used 3) free 
   
-TABLE OF CONTENTS
+# TABLE OF CONTENTS
 
 config.sh:
 In a nutshell, this bash script is created so that any user can change certain components of this program more conviniently. For example, the script enables the program to recognize the user's machine's name. It enables the user to change the paths of the files that are going to be created by install.sh to whatever path they desire, change the name of the log file to any name the user sees fit, and it also stores the user's email so it can later email the report file to them. 
