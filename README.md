@@ -16,7 +16,7 @@ git clone git@github.com:jmoghassemi/CPU_usage.git
 2) The developers of this program have assumed that the user will clone this project onto their "/home" directory. Therefore, the default settings of this program are configured as such. If you decide to clone this program into another directory on your system, then before any testing, you must first provide that address/absolute path to the bash script "config.sh". In "config.sh" set the variable "sourceDir" equal to the path where the project is cloned.
 => sourceDir = 'address of the directory where the project is cloned'
 
-  Once "sourceDir" has been set to the correct path, you can execute the bash script "config.sh" using either of these     two commands: "./config.sh" or "bash config.sh". Failing to set "sourceDir" equal to the path where the project is       cloned will stop this program from running properly.	
+  First, "sourceDir" is set to the correct path, failing to set "sourceDir" equal to the path where the project is cloned will stop this program from running properly.	
     
 3) Next, execute the bash script "install.sh" by either of these commands "./install.sh" or "bash install.sh". This script creates multiple directories on your system that are going to be used by the program later on. Make sure install.sh is executable on your system by running this command first: "chmod +x install.sh". (for more information regarding "install.sh" please refer to the table of contents bellow).
 
