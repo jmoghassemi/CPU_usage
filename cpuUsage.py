@@ -30,7 +30,7 @@ if __name__ == "__main__":
 
 	while True: 
 		if func.check_mem_used()>args.byte_limit_value:
-			print(f"Initiating system monitoring each {args.minutes} minutes. Creating Alert Wall")
+                    print(f"Initiating system monitoring every {args.minutes} minute(s). Creating Alert Wall")
 			func.cpu_rapport()
 			func.mem_rapport()
 			func.make_alert_wall()

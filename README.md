@@ -16,12 +16,12 @@ git clone git@github.com:jmoghassemi/CPU_usage.git
 2) The developers of this program have assumed that the user will clone this project onto their "/home" directory. Therefore, the default settings of this program are configured as such. If you decide to clone this program into another directory on your system, then before any testing, you must first provide that address/absolute path to the bash script "config.sh". In "config.sh" set the variable "sourceDir" equal to the path where the project is cloned.
 => sourceDir = 'address of the directory where the project is cloned'
 
-  First, "sourceDir" is set to the correct path, failing to set "sourceDir" equal to the path where the project is cloned will stop this program from running properly.	
+  Initially, "sourceDir" is set to the user's home directory. If the project is not cloned onto the home directory, and the the user fails to set "sourceDir" equal to the path where the project is cloned, then this program will not run properly.	
     
 3) Next, execute the bash script "install.sh" by either of these commands "./install.sh" or "bash install.sh". This script creates multiple directories on your system that are going to be used by the program later on. Make sure install.sh is executable on your system by running this command first: "chmod +x install.sh". (for more information regarding "install.sh" please refer to the table of contents bellow).
-  /etc/cpuUsage : This is a main directory for source of the application.
-  /etc/cpuUsage/report : This is a directory for application report files.
-  /etc/systemd/system : This is a builtin directory for Linux Operating System services.
+  /etc/cpuUsage : This is the main directory for the source of the application.
+  /etc/cpuUsage/report : This is the directory where the application's report files will be written.
+  /etc/systemd/system : This is the builtin directory where the service files are stored in Linux Operating System.
 
 4) After succesfuly running the "install.sh" script, the user can test the program. Execute the python script "/etc/cpuUsage/cpuUsage.py" with this command and give it your inputs: 
 
@@ -29,9 +29,9 @@ git clone git@github.com:jmoghassemi/CPU_usage.git
   
   "python3 cpuUsge.py [integer for MB] [integer for min]. 
 
-You can also run the python script without any inputs since it has been assigned default arguments. These default values are set to 75 MB of memory being used and a reccurring evaluation of the system every 3 minutes. 
+You can also run the python script without any inputs since it has been assigned default arguments. These default values are set to 75% of the user's total memory (measured in MBs) and a reccurring evaluation of the system every 3 minutes. 
 
-There are other ways to input your arguments into cpuUsage.py. For example, you can open the service file cpuUsage.service in vim and provide the arguments as such: "ExecStart=/usr/bin/python3 /home/paramont/CPU_usage/cpuUsage.py [integer for MB] [integer for min]". Or open cpuUsage.py in Vim and under the "Variable Definition" section you will find the "default_limit" and "default min" variables. You can change these values as you wish. 
+There are other ways to input your arguments into cpuUsage.py. For example, you can open the service file cpuUsage.service in vim and provide the arguments as such: "ExecStart=/usr/bin/python3 /etc/cpuUsage/cpuUsage.py [integer for MB] [integer for min]". Or open cpuUsage.py in Vim and under the "Variable Definition" section you will find the "default_limit" and "default min" variables. You can change these values as you wish. 
 After the cpuUsage.py has been executed, the user's system will be constantly monitored and once the critical threshold is reached, three report files will be generated in this address: '/etc/cpuUsage/destinationDir/report'. These files are "cpu_[date].log", "mem_[date].log", and "swap_[date].log". Here you can find what each entry represents in each file.  
 
   cpu_[date].log: 1) pid 2) user 3) %mem 4) command
