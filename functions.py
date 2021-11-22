@@ -12,7 +12,6 @@ def cpu_rapport():
   
         cpu_filename = '/etc/cpuUsage/report/cpu_' + date + '.log'
         with open(cpu_filename, "a+") as f:
-
             f.write(full_time + '\n')
 
             ps_output = os.popen('ps -o pid,user,%mem,command ax | grep -v PID | grep -v 0.0').read().splitlines()
@@ -43,12 +42,10 @@ def mem_rapport():
         swap_output[0] = full_time
         
         with open(mem_filename, "a+") as mf:
-
             mf.write(mem_output[0]+','+mem_output[1]+','+mem_output[2]+','+mem_output[3]+','+mem_output[6]+'\n')
             mf.close()
         
         with open(swp_filename, "a+") as sf:
-
             sf.write(swap_output[0]+','+swap_output[1]+','+swap_output[2]+','+swap_output[3]+'\n')
             sf.close()
 
